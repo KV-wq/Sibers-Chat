@@ -1,0 +1,22 @@
+<script setup>
+import Logout from "./logout.vue";
+defineProps({
+  handleOptionsView: Function,
+});
+</script>
+
+<template>
+  <div
+    class="absolute flex justify-between items-center top-0 w-4/5 right-0 h-16 border-2 border-[#7E22CE]"
+  >
+    <img
+      @click="handleOptionsView"
+      src="/chat.png"
+      class="w-12 ml-2 cursor-pointer transition hover:scale-105 active:scale-95"
+      alt="Details.."
+    />
+    <Logout class="" />
+  </div>
+</template>
+
+<style scoped></style>
