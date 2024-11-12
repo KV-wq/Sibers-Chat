@@ -6,6 +6,7 @@ import Header from "./Header.vue";
 import Message from "./Message.vue";
 
 import { getDatabase, ref as databaseRef, onValue } from "firebase/database";
+import { auth } from "../firebase";
 
 const defaultAvatarUrl =
   "https://www.seqan.de/assets/images/people/avatar_dummy.svg";
@@ -59,12 +60,18 @@ onBeforeUpdate(() => {
   <div class="w-4/5 h-[calc(100%-4rem)] mt-16 flex flex-col">
     <Header :handle-options-view="props.handleOptionsView" />
     <ChatOptions v-if="props.optionsIsView" :chat-id="props.chatId" />
-    <div class="h-5/6 w-full flex flex-col overflow-auto">
+    <div class="h-5/6 w-full overflow-auto">
       <div
-        class="w-fit h-fit flex"
+        class="w-full h-fit flex"
+        :class="auth.currentUser.uid == message.user.id ? 'justify-end' : ''"
         v-for="message in messages"
         :key="message.id"
       >
+        <Message
+          class="max-w-[85%] w-fit h-fit mr-1"
+          :text="message.text"
+          v-if="auth.currentUser.uid == message.user.id"
+        />
         <img
           :src="
             message.user.avatarUrl ? message.user.avatarUrl : defaultAvatarUrl
@@ -72,8 +79,13 @@ onBeforeUpdate(() => {
           alt="user"
           :title="message.user.displayName"
           class="w-14 h-14 rounded-full m-3 mr-0"
+          :class="auth.currentUser.uid == message.user.id ? 'mr-4' : ''"
         />
-        <Message class="max-w-[90%] w-fit h-fit" :text="message.text" />
+        <Message
+          class="max-w-[90%] w-fit h-fit"
+          :text="message.text"
+          v-if="auth.currentUser.uid !== message.user.id"
+        />
       </div>
     </div>
     <div class="h-1/6 flex items-center justify-between relative">

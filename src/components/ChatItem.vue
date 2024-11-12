@@ -8,8 +8,10 @@ const props = defineProps({
   imgUrl: String,
   chatId: String,
   lastMessage: String,
+  selectedChatId: String,
 });
 const selectChat = inject("selectChat");
+
 const select = () => {
   selectChat(props.chatId);
 };
@@ -19,6 +21,7 @@ const select = () => {
   <div
     @click="select"
     class="flex w-full rounded-lg border-2 border-purple-700 shadow-purple-500 hover:shadow-2xl max-[500px]:min-h-14 max-[500px]:h-14 min-h-24 h-24 hover:-translate-y-[1px] max-[500px]:hover:translate-y-0 max-[500px]:active:-translate-y-2 transition-all cursor-pointer"
+    :class="props.selectedChatId === props.chatId ? ' bg-[#20152c]' : ''"
   >
     <img
       :src="props.imgUrl ? props.imgUrl : defaultImg"

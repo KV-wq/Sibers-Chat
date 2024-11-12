@@ -50,6 +50,7 @@ const createChat = async () => {
       :key="chatId"
       :chat-id="chatId"
       :title="chat.name"
+      :selected-chat-id="props.chatId"
       :img-url="chat.imageUrl"
       :last-message="
         chat.messages
