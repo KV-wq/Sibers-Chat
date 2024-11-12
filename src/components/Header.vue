@@ -1,5 +1,5 @@
 <script setup>
-import Logout from "./logout.vue";
+import Logout from "./Logout.vue";
 defineProps({
   handleOptionsView: Function,
 });

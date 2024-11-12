@@ -12,14 +12,17 @@ import { onMounted, ref } from "vue";
 const props = defineProps({
   chatId: String,
 });
+const createdBy = ref("");
 const matchingUsers = ref([]);
 const users = ref([]);
 onMounted(async () => {
   const chatRef = await databaseRef(getDatabase(), `chats/${props.chatId}`);
+
   onValue(chatRef, (snapshot) => {
     const chatData = snapshot.val();
     if (chatData) {
       users.value = chatData.users;
+      createdBy.value = chatData.createdBy;
     }
   });
 });
@@ -79,6 +82,7 @@ const userInput = ref("");
       :key="id"
       :userId="user"
       :deleteUser="removeUserFromChat"
+      :createdBy="createdBy"
     />
 
     <input

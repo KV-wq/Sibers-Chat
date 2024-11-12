@@ -51,7 +51,6 @@ const createChat = async () => {
       :chat-id="chatId"
       :title="chat.name"
       :img-url="chat.imageUrl"
-      :chatAdmin="chat.createdBy"
       :last-message="
         chat.messages
           ? chat.messages[

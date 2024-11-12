@@ -10,8 +10,6 @@
   },
   "dependencies": {
     "firebase": "^11.0.1",
-    "firestore": "^1.1.6",
-    "mitt": "^3.0.1",
     "vue": "^3.4.37",
     "vue-router": "^4.4.5"
   },

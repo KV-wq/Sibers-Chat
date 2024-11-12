@@ -19,6 +19,7 @@ onMounted(async () => {
 
     userName.value = userData.displayName;
     avatarUrl.value = userData.avatarUrl || defaultImg;
+    console.log(props.createdBy);
   });
 });
 </script>
@@ -41,7 +42,10 @@ onMounted(async () => {
       >
       <button
         @click="deleteUser(props.userId)"
-        v-if="auth.currentUser.uid === props.createdBy"
+        v-if="
+          auth.currentUser.uid === props.createdBy &&
+          auth.currentUser.uid !== props.userId
+        "
         class="mr-3 text-red-500 hover:scale-110 active:scale-90 transition-all bg-purple-900/50 py-0 px-2 rounded-full"
       >
         X
