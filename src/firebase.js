@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
+import { getDatabase, set, ref as databaseRef } from "firebase/database";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -38,6 +38,12 @@ const registerUser = async (avatarUrl, username, email, password) => {
     const user = userCredential.user;
 
     await updateProfile(user, {
+      displayName: username,
+      photoURL: avatarUrl,
+    });
+    const userRef = databaseRef(getDatabase(), `users/${user.uid}`);
+    await set(userRef, {
+      id: user.uid,
       displayName: username,
       avatarUrl: avatarUrl,
     });

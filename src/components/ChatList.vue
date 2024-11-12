@@ -10,6 +10,10 @@ import {
 } from "firebase/database";
 import { auth } from "../firebase";
 
+const props = defineProps({
+  chatId: String,
+});
+
 const chats = ref({});
 
 onMounted(async () => {
@@ -17,6 +21,15 @@ onMounted(async () => {
 
   onValue(chatsRef, (snapshot) => {
     chats.value = snapshot.val() || [];
+    chats.value = Object.entries(chats.value).reduce(
+      (filteredChats, [chatId, chat]) => {
+        if (chat["users"].some((userId) => userId == auth.currentUser.uid)) {
+          filteredChats[chatId] = chat;
+        }
+        return filteredChats;
+      },
+      {}
+    );
   });
 });
 
@@ -38,6 +51,14 @@ const createChat = async () => {
       :chat-id="chatId"
       :title="chat.name"
       :img-url="chat.imageUrl"
+      :chatAdmin="chat.createdBy"
+      :last-message="
+        chat.messages
+          ? chat.messages[
+              Object.keys(chat.messages)[Object.keys(chat.messages).length - 1]
+            ].text
+          : ' '
+      "
     />
     <button
       @click="createChat"

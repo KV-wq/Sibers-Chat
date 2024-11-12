@@ -22,7 +22,18 @@ onMounted(async () => {
   const chatsRef = await databaseRef(getDatabase(), "chats");
   onValue(chatsRef, (snapshot) => {
     chats.value = snapshot.val() || null;
-    selectedChatId.value = Object.keys(chats.value)[0]; // by default, the first chat is selected
+    chats.value = Object.entries(chats.value).reduce(
+      (filteredChats, [chatId, chat]) => {
+        if (chat["users"].some((userId) => userId == auth.currentUser.uid)) {
+          filteredChats[chatId] = chat;
+        }
+        return filteredChats;
+      },
+      {}
+    );
+
+    if (!selectedChatId.value)
+      selectedChatId.value = Object.keys(chats.value)[0]; // by default, the first chat is selected
   });
 });
 
@@ -49,7 +60,7 @@ onMounted(() => {
 <template>
   <div class="h-screen w-screen flex items-center">
     <div
-      class="mx-auto border-4 border-[#7c3eb7] rounded-xl w-5/6 h-5/6 max-[500px]:w-full max-[500px]:h-full relative"
+      class="mx-auto border-4 border-[#7c3eb7] rounded-xl w-5/6 h-5/6 max-[500px]:w-full max-[500px]:h-full relative bg-[#22252c]"
     >
       <img src="/loader.svg" class="w-full h-full" v-if="isLoading" />
       <div v-else class="flex h-full w-full relative">
@@ -57,7 +68,10 @@ onMounted(() => {
           v-if="optionsIsView"
           class="w-1/5 h-full border-r-4 border-[#7c3eb7] absolute bg-black/40"
         ></div>
-        <ChatList class="w-1/5 h-full border-r-4 border-[#7c3eb7]" />
+        <ChatList
+          class="w-1/5 h-full border-r-4 border-[#7c3eb7]"
+          :chatId="selectedChatId"
+        />
 
         <NoneChats v-if="!chats" />
         <ChatRoom

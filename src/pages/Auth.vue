@@ -124,10 +124,9 @@ const handleLogin = async () => {
         </form>
         <form @submit.prevent="handleRegister" v-if="param == 'register'">
           <input
-            required
             v-model="avatarUrl"
             type="url"
-            placeholder="Avatar URL"
+            placeholder="Avatar URL (optional)"
             class="w-full px-4 py-2 rounded-xl border-2 border-gray-400 focus:outline-none focus:border-purple-500"
           />
           <input

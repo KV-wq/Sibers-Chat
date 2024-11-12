@@ -7,6 +7,7 @@ const props = defineProps({
   title: String,
   imgUrl: String,
   chatId: String,
+  lastMessage: String,
 });
 const selectChat = inject("selectChat");
 const select = () => {
@@ -24,7 +25,7 @@ const select = () => {
       class="rounded-full w-14 h-14 my-auto ml-3 shadow-md max-[1000px]:mx-auto max-[500px]:my-1 max-[500px]:w-12 max-[500px]:h-12"
       alt="Chat_preview"
     />
-    <div class="ml-3 mt-3 overflow-hidden max-[1000px]:hidden">
+    <div class="ml-3 mt-3 overflow-hidden max-[1000px]:hidden w-full">
       <span
         class="whitespace-nowrap w-[95%] overflow-clip break-words text-ellipsis"
         >{{ props.title }}</span
@@ -32,7 +33,7 @@ const select = () => {
       <p
         class="text-[.8rem] mt-3 whitespace-nowrap w-[95%] overflow-clip break-words text-ellipsis"
       >
-        Последнее сообщение asdasdadsa
+        {{ props.lastMessage }}
       </p>
     </div>
   </div>
