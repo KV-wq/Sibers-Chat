@@ -60,7 +60,7 @@ onMounted(() => {
 <template>
   <div class="h-screen w-screen flex items-center">
     <div
-      class="mx-auto border-4 border-[#7c3eb7] rounded-xl w-5/6 h-5/6 max-[500px]:w-full max-[500px]:h-full relative bg-[#22252c]"
+      class="shadow-purple-800/20 shadow-lg mx-auto border-4 border-[#7c3eb7] rounded-xl w-5/6 h-5/6 max-[500px]:w-full max-[500px]:h-full relative bg-[#22252c]"
     >
       <img src="/loader.svg" class="w-full h-full" v-if="isLoading" />
       <div v-else class="flex h-full w-full relative">

@@ -23,6 +23,7 @@ onMounted(async () => {
     chats.value = snapshot.val() || [];
     chats.value = Object.entries(chats.value).reduce(
       (filteredChats, [chatId, chat]) => {
+        //checking which chats the user is in
         if (chat["users"].some((userId) => userId == auth.currentUser.uid)) {
           filteredChats[chatId] = chat;
         }

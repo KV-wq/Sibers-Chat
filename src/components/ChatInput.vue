@@ -12,6 +12,7 @@ const props = defineProps({
 });
 const newMessage = ref("");
 const sendMessage = async () => {
+  //Create a new message
   if (newMessage.value.trim() !== "") {
     const chatRef = databaseRef(
       getDatabase(),

@@ -28,6 +28,7 @@ const fetchMessages = () => {
     const messagesData = snapshot.val();
     if (messagesData) {
       messages.value = Object.entries(messagesData).map(
+        //receiving all chat messages
         ([messageId, messageData]) => ({
           id: messageId,
           text: messageData.text,

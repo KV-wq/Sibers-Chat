@@ -49,6 +49,8 @@ const searchUsers = (searchQuery) => {
     if (userInput.value.length == 0) matchingUsers.value = [];
   });
 };
+
+//add and remove user from chat
 const addUserToChat = async (userId) => {
   const chatRef = databaseRef(getDatabase(), `chats/${props.chatId}`);
   await update(chatRef, {
