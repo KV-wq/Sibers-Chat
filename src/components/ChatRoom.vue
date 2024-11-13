@@ -69,9 +69,9 @@ onBeforeUpdate(() => {
         :key="message.id"
       >
         <Message
-          class="max-w-[85%] w-fit h-fit mr-1"
+          class="max-w-[85%] w-fit h-fit mr-1 text-end"
           :text="message.text"
-          v-if="auth.currentUser.uid == message.user.id"
+          v-if="auth.currentUser.uid === message.user.id"
         />
         <img
           :src="
@@ -79,8 +79,8 @@ onBeforeUpdate(() => {
           "
           alt="user"
           :title="message.user.displayName"
-          class="w-14 h-14 rounded-full m-3 mr-0"
-          :class="auth.currentUser.uid == message.user.id ? 'mr-4' : ''"
+          class="w-14 h-14 rounded-full m-2 mr-0"
+          :class="auth.currentUser.uid === message.user.id ? 'mr-4' : ''"
         />
         <Message
           class="max-w-[90%] w-fit h-fit"
