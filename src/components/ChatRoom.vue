@@ -18,6 +18,7 @@ const props = defineProps({
 });
 
 const messages = ref([]);
+const isNewChat = ref(false);
 const fetchMessages = () => {
   const messagesRef = databaseRef(
     getDatabase(),
@@ -39,8 +40,10 @@ const fetchMessages = () => {
           },
         })
       );
+      isNewChat.value = false;
     } else {
       messages.value = [];
+      isNewChat.value = true;
     }
   });
 };
@@ -66,8 +69,15 @@ onBeforeUpdate(() => {
 
 <template>
   <div class="w-4/5 h-[calc(100%-4rem)] mt-16 flex flex-col">
-    <Header :handle-options-view="props.handleOptionsView" />
-    <ChatOptions v-if="props.optionsIsView" :chat-id="props.chatId" />
+    <Header
+      :handle-options-view="props.handleOptionsView"
+      :isNewChat="isNewChat"
+    />
+    <ChatOptions
+      v-if="props.optionsIsView"
+      :chat-id="props.chatId"
+      :handle-options-view="props.handleOptionsView"
+    />
     <div class="h-5/6 w-full overflow-auto scrolling">
       <div
         class="w-full h-fit flex"

@@ -32,10 +32,17 @@ onMounted(async () => {
       {}
     );
 
-    if (!selectedChatId.value)
-      selectedChatId.value = Object.keys(chats.value)[0]; // by default, the first chat is selected
+    if (!selectedChatId.value) defaultSelectedChat(); // by default, the first chat is selected
   });
 });
+const defaultSelectedChat = () => {
+  if (Object.keys(chats.value)) {
+    selectedChatId.value = Object.keys(chats.value)[0];
+  } else {
+    selectedChatId.value = null;
+  }
+};
+provide("defaultSelectedChat", defaultSelectedChat);
 
 const selectChat = (chatId) => {
   selectedChatId.value = chatId;

@@ -19,7 +19,6 @@ onMounted(async () => {
 
     userName.value = userData.displayName;
     avatarUrl.value = userData.avatarUrl || defaultImg;
-    console.log(props.createdBy);
   });
 });
 </script>

@@ -26,6 +26,10 @@ const sendMessage = async () => {
       userAvatarUrl: auth.currentUser.photoURL,
     });
     newMessage.value = "";
+
+    const chatContainer = document.querySelector(".scrolling");
+    chatContainer.scrollTop = chatContainer.scrollHeight; // scroll the chat down during initialization
+    chatContainer.style.scrollBehavior = "smooth";
   }
 };
 </script>
