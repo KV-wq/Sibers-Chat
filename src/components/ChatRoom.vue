@@ -44,13 +44,20 @@ const fetchMessages = () => {
     }
   });
 };
+const scrollChat = () => {
+  const chatContainer = document.querySelector(".scrolling");
+  chatContainer.scrollTop = chatContainer.scrollHeight; // scroll the chat down during initialization
+  chatContainer.style.scrollBehavior = "smooth";
+};
 
 onMounted(async () => {
   await fetchMessages();
+  scrollChat();
 });
 
 setTimeout(() => {
   fetchMessages();
+  scrollChat();
 }, 2000);
 onBeforeUpdate(() => {
   fetchMessages();
@@ -61,7 +68,7 @@ onBeforeUpdate(() => {
   <div class="w-4/5 h-[calc(100%-4rem)] mt-16 flex flex-col">
     <Header :handle-options-view="props.handleOptionsView" />
     <ChatOptions v-if="props.optionsIsView" :chat-id="props.chatId" />
-    <div class="h-5/6 w-full overflow-auto">
+    <div class="h-5/6 w-full overflow-auto scrolling">
       <div
         class="w-full h-fit flex"
         :class="auth.currentUser.uid == message.user.id ? 'justify-end' : ''"

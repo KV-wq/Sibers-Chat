@@ -52,7 +52,7 @@ watch(imageUrl, async () => {
       />
       <input
         v-model="imageUrl"
-        placeholder="Chat image url.."
+        placeholder="Enter image url.."
         class="text-sm text-center bg-transparent border-none outline-none h-8 text-slate-300"
       />
       <span class="text-xl">Users:</span>
