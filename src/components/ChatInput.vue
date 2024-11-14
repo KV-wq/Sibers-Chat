@@ -43,7 +43,7 @@ const sendMessage = async () => {
       v-model="newMessage"
       placeholder="Your message.."
       type="text"
-      class="w-full mx-4 h-3/5 rounded-3xl border-2 border-[#7E22CE] bg-transparent text-lg focus:outline-none focus:border-[3px] focus:border-purple-700 pl-3"
+      class="w-full mx-4 h-3/5 rounded-3xl border-2 border-[#7E22CE] bg-transparent text-lg focus:outline-none focus:border-[3px] focus:border-purple-700 pl-3 pr-14"
     />
     <button
       type="submit"
