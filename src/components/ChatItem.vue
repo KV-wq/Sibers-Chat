@@ -13,7 +13,7 @@ const props = defineProps({
 const selectChat = inject("selectChat");
 
 const select = () => {
-  selectChat(props.chatId); // select current chat
+  selectChat(props.chatId);
 };
 </script>
 
